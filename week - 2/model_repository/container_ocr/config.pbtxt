@@ -1,0 +1,35 @@
+name: "container_ocr"
+platform: "tensorrt_plan"
+max_batch_size: 64
+
+input [
+  {
+    name: "ocr_crops"
+    data_type: TYPE_FP32
+    format: FORMAT_NCHW
+    dims: [ 3, 128, 384 ]
+    reshape { shape: [ 3, 128, 384 ] }
+  }
+]
+
+output [
+  {
+    name: "char_logits"
+    data_type: TYPE_FP32
+    dims: [ -1, 37 ]  # 26 letters + 10 digits + blank token (CTC)
+  }
+]
+
+dynamic_batching {
+  preferred_batch_size: [ 8, 16, 32, 64 ]
+  max_queue_delay_microseconds: 3000
+}
+
+instance_group [
+  {
+    count: 2
+    kind: KIND_GPU
+    gpus: [ 0 ]
+  }
+]
+

@@ -1,0 +1,47 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🚀 VisionPort: FastAPI Gateway (Port 8080)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "uvicorn",
+      "args": [
+        "services.api_gateway.main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8080",
+        "--reload"
+      ],
+      "jinja": true,
+      "justMyCode": true,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "🧪 VisionPort: Run All Tests (pytest)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["tests", "-v"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "📊 VisionPort: Inference Benchmark Simulation",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/benchmark_triton.py",
+      "args": ["--concurrency", "8", "--frames", "25", "--batch-size", "1"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "⚙️ VisionPort: TensorRT Engine Builder (Dry-Run)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/build_tensorrt_engine.py",
+      "args": ["--dry-run"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
+
