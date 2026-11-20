@@ -63,7 +63,7 @@ class TritonInferenceClient:
     async def infer_detector(
         self,
         preprocessed_tensor: np.ndarray,
-        model_name: str = "container_detector",
+        model_name: str = "traffic_detector",
         model_version: str = "1"
     ) -> Tuple[np.ndarray, float]:
         """
